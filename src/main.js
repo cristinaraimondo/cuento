@@ -1,14 +1,17 @@
 import Firstscene from './scenes/Firstscene.js';
+import Video from './scenes/Video.js';
+import Presentación from './scenes/Presentación.js';
 const config ={
     title:'Capericita roja ',
-    pixelArt:true,
+  
 
     type:Phaser.AUTO,
     
     scale: {
         parent: 'phaser_container',
-        width: 900,
+        width:900,
         height: 600,
+        antialias: true, // Habilitar antialiasing
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
@@ -21,6 +24,6 @@ const config ={
             debug: true
         }
     },
-    scene:[Firstscene]
+    scene:[Presentación,Video,Firstscene ]
 };
 const game = new Phaser.Game(config);

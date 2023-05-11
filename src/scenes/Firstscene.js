@@ -1,5 +1,6 @@
 import Player from "../clases/player.js";
 
+
 class Firstscene extends Phaser.Scene{
 
     constructor(){
@@ -15,9 +16,9 @@ class Firstscene extends Phaser.Scene{
         this.load.path = './assets/';
 
         // LOAD IMAGES AND SPRITES
-        this.load.image('background', 'fondos/fondoArboles.png')
+        this.load.image('background', 'fondos/fondo.png')
                  
-                 .spritesheet('dude', 'sprites/dude.png',
+                 .spritesheet('dude', 'sprites/dude4.png',
                 { frameWidth: 174.88, frameHeight: 219 }
             )
             .image('flecha', 'sprites/flecha.png')
@@ -26,13 +27,15 @@ class Firstscene extends Phaser.Scene{
     }
     create(){
        
-        this.background = this.add.tileSprite(480, 320, 960, 640, 'background').setScrollFactor(0);
+        this.background = this.add.tileSprite(480, 320, 960, 640, 'background').setScrollFactor(0)
         
         
         this.player = new Player(this, 100, 200, 'dude').setScale(0.8)
-
-        this.wall_floor = this.physics.add.staticGroup();
+        
+       
+        this.wall_floor = this.physics.add.staticGroup()
         this.wall_floor.create(0, 600, 'piso').setOrigin(0)
+        this.wall_floor.create(6000, 600, 'piso').setOrigin(0)
         this.controlesVisuales();
         this.cursors = this.input.keyboard.createCursorKeys();
         this.animacionesDeLaEscena();
@@ -41,7 +44,10 @@ class Firstscene extends Phaser.Scene{
          //   this.scene.world.setBounds(0, 0, 300, 600, true)
         //}
         this.physics.add.collider([this.player], this.wall_floor);
-    
+        this.time.delayedCall(2000, () => {
+            this.scene.start('Video');
+       });
+         
       
     }
     animacionesDeLaEscena() {
@@ -120,7 +126,7 @@ class Firstscene extends Phaser.Scene{
         this.cameras.main.scrollX = this.player.x - 400;
 		this.cameras.main.scrollY = 0;
         this.background.tilePositionX= this.player.x;
-       // this.background.tilePositionY= this.player.y;
+      
 
     }
 }
