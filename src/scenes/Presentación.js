@@ -18,6 +18,9 @@ class Presentacion extends Phaser.Scene{
         this.time.delayedCall(3000, () => {
             this.scene.start('Video');
        });
+       
+     
+      
       }
       
 

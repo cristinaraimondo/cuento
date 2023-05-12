@@ -33,7 +33,8 @@ class Video extends Phaser.Scene {
         // Hace el botón invisible
         boton.setVisible(false);
       });
-      
+
+     
   
      
       
