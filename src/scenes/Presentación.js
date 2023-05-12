@@ -15,7 +15,7 @@ class Presentacion extends Phaser.Scene{
       create(){
         this.tapa = this.add.image(450, 300, 'intro')
         //var text = this.add.text(100, 100, '¡Hola, mundo!', { fontSize: '32px', fill: '#000' });
-        this.time.delayedCall(2000, () => {
+        this.time.delayedCall(3000, () => {
             this.scene.start('Video');
        });
       }
