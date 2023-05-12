@@ -44,9 +44,7 @@ class Firstscene extends Phaser.Scene{
          //   this.scene.world.setBounds(0, 0, 300, 600, true)
         //}
         this.physics.add.collider([this.player], this.wall_floor);
-        this.time.delayedCall(2000, () => {
-            this.scene.start('Video');
-       });
+       
          
       
     }

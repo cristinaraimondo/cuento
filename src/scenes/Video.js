@@ -5,6 +5,8 @@ class Video extends Phaser.Scene {
       }
     preload() {
       this.load.image('rep','assets/audio.png')
+      this.load.image('btnCap','assets/sprites/botonCap.png')
+      this.load.image('btnLobo','assets/sprites/btnlobo.png')
       this.load.image('pausa','assets/pausar.png')
       this.load.video('video', 'assets/videos/cepe1.mp4','loadeddata', false, true);
       this.load.audio('voz', 'assets/sounds/voz1.MP3');
@@ -33,6 +35,23 @@ class Video extends Phaser.Scene {
         // Hace el botón invisible
         boton.setVisible(false);
       });
+      this.time.delayedCall(40000, () => {
+
+       var botonCap=this.add.image(800, 400,'btnCap').setScale(0.2)
+      botonCap.setInteractive()
+      botonCap.on('pointerdown', () => {
+       this.scene.start('Firstscene');
+       this.sound.pauseAll();
+      });
+      var botonCap=this.add.image(800, 200,'btnLobo').setScale(0.2)
+      botonCap.setInteractive()
+      botonCap.on('pointerdown', function() {
+        // Hace el botón invisible
+        boton.setVisible(false);
+      });
+        
+   });
+      
 
      
   
