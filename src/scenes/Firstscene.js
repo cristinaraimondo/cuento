@@ -24,6 +24,7 @@ class Firstscene extends Phaser.Scene{
            
             .image('flecha', 'sprites/flecha.png')
             .image('piso', 'piso.png' )
+            .image('tronco','sprites/tronco.png')
             .atlas('ing', 'sprites/ingredi/ingredi.png', 'sprites/ingredi/ingredi_atlas.json');
 
             
@@ -31,18 +32,22 @@ class Firstscene extends Phaser.Scene{
     create(){
        
         this.background = this.add.tileSprite(480, 320, 960, 640, 'background').setScrollFactor(0)
-        
+        this.tronco = this.physics.add.staticGroup();
+        this.tronco.create(2880, 500, "tronco").setScale(0.5).setSize(120,120).setOffset(220, 60)
         
         this.player = new Player(this, 100, 200, 'dude').setScale(0.8)
-        
+      // this.tronco= this.physics.add.sprite(2880,500,'tronco').setScale(0.5)
+       // this.tronco.body.setSize(180, 210);
+        //this.tronco.body.setOffset(200, 10);
         this.cebolla=this.physics.add.sprite(900, 300, 'ing', '1').setScale(0.2)
-        this.ajo=this.physics.add.sprite(20, 305, 'ing', '2').setScale(0.2)
-      this.peperoni=this.physics.add.sprite(-350, 410, 'ing', '3').setScale(0.2)
-      this.masa=this.physics.add.sprite(-500, 400, 'ing', '4').setScale(0.2)
-      this.queso=this.physics.add.sprite(1700, 450, 'ing', '6').setScale(0.2)
-     this.oregano=this.physics.add.sprite(1100, 250, 'ing', '7').setScale(0.2)
-     this.campinone= this.physics.add.sprite(150,289, 'ing', '8').setScale(0.2)
-     this.tomatete=this.physics.add.sprite(3020, 390, 'ing', '9').setScale(0.2)
+        this.ajo=this.physics.add.sprite(20, 305, 'ing', '7').setScale(0.2)
+      this.peperoni=this.physics.add.sprite(-350, 410, 'ing', '8').setScale(0.2)
+      this.masa=this.physics.add.sprite(-500, 400, 'ing', '5').setScale(0.2)
+      this.queso=this.physics.add.sprite(1700, 450, 'ing', '4').setScale(0.2)
+     this.oregano=this.physics.add.sprite(1100, 280, 'ing', '6').setScale(0.2)
+     this.campinone= this.physics.add.sprite(150,289, 'ing', '2').setScale(0.2)
+     this.tomate=this.physics.add.sprite(3020, 390, 'ing', '3').setScale(0.2)
+     this.aji=this.physics.add.sprite(2880,170,'ing','9').setScale(0.2)
     
        
         this.wall_floor = this.physics.add.staticGroup()
@@ -56,6 +61,8 @@ class Firstscene extends Phaser.Scene{
          //   this.scene.world.setBounds(0, 0, 300, 600, true)
         //}
         this.physics.add.collider([this.player], this.wall_floor);
+        this.physics.add.collider([this.player], this.tronco);
+       
         
         this.physics.add.overlap(this. cebolla, this.player, () => {
            // this.registry.events.emit('update_points');
@@ -69,6 +76,30 @@ class Firstscene extends Phaser.Scene{
                     // this.registry.events.emit('update_points');
                      this.queso.destroy();
                       });
+                      this.physics.add.overlap(this.aji, this.player, () => {
+                        // this.registry.events.emit('update_points');
+                         this.aji.destroy();
+                          });
+                          this.physics.add.overlap(this.peperoni, this.player, () => {
+                            // this.registry.events.emit('update_points');
+                             this.peperoni.destroy();
+                              });
+                              this.physics.add.overlap(this.masa, this.player, () => {
+                                // this.registry.events.emit('update_points');
+                                 this.masa.destroy();
+                                  });
+                                  this.physics.add.overlap(this.oregano, this.player, () => {
+                                    // this.registry.events.emit('update_points');
+                                     this.oregano.destroy();
+                                      });
+                                      this.physics.add.overlap(this.tomate, this.player, () => {
+                                        // this.registry.events.emit('update_points');
+                                         this.tomate.destroy();
+                                          });
+                                          this.physics.add.overlap(this.campinone, this.player, () => {
+                                            // this.registry.events.emit('update_points');
+                                             this.campinone.destroy();
+                                              });
       
     }
     animacionesDeLaEscena() {
