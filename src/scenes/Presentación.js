@@ -1,8 +1,10 @@
 class Presentacion extends Phaser.Scene{
     constructor() {
         super({ key: 'Presentacion' });
+
         
       }
+     
       preload(){
         this.load.path = './assets/';
 

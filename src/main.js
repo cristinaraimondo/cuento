@@ -24,6 +24,12 @@ const config ={
             debug: true
         }
     },
-    scene:[Presentación,Video,Firstscene ]
+    scene:[ Firstscene,Presentación,Video, ],
+    video: {
+        key: 'video',
+        type: 'video',
+        sources: ['video.mp4', 'video.ogg'],
+        audio: true
+      }
 };
 const game = new Phaser.Game(config);

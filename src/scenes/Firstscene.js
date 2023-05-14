@@ -18,12 +18,15 @@ class Firstscene extends Phaser.Scene{
         // LOAD IMAGES AND SPRITES
         this.load.image('background', 'fondos/fondo.png')
                  
-                 .spritesheet('dude', 'sprites/dude4.png',
+             .spritesheet('dude', 'sprites/dude4.png',
                 { frameWidth: 174.88, frameHeight: 219 }
             )
+           
             .image('flecha', 'sprites/flecha.png')
             .image('piso', 'piso.png' )
+            .atlas('ing', 'sprites/ingredi/ingredi.png', 'sprites/ingredi/ingredi_atlas.json');
 
+            
     }
     create(){
        
@@ -31,11 +34,19 @@ class Firstscene extends Phaser.Scene{
         
         
         this.player = new Player(this, 100, 200, 'dude').setScale(0.8)
-        
+        this.add.sprite(900, 300, 'ing', '1').setScale(0.2);
+        this.add.sprite(20, 305, 'ing', '2').setScale(0.2);
+        this.add.sprite(-350, 210, 'ing', '3').setScale(0.2);
+        this.add.sprite(-500, 400, 'ing', '4').setScale(0.2);
+        this.add.sprite(600, 250, 'ing', '5').setScale(0.2);
+        this.add.sprite(1700, 150, 'ing', '6').setScale(0.2);
+        this.add.sprite(1100, 250, 'ing', '7').setScale(0.2);
+        this.add.sprite(150,289, 'ing', '8').setScale(0.2);
+        this.add.sprite(3020, 390, 'ing', '9').setScale(0.2);
        
         this.wall_floor = this.physics.add.staticGroup()
-        this.wall_floor.create(0, 600, 'piso').setOrigin(0)
-        this.wall_floor.create(6000, 600, 'piso').setOrigin(0)
+        this.wall_floor.create(0, 650, 'piso').setOrigin(0)
+        this.wall_floor.create(6000, 650, 'piso').setOrigin(0)
         this.controlesVisuales();
         this.cursors = this.input.keyboard.createCursorKeys();
         this.animacionesDeLaEscena();
@@ -44,6 +55,7 @@ class Firstscene extends Phaser.Scene{
          //   this.scene.world.setBounds(0, 0, 300, 600, true)
         //}
         this.physics.add.collider([this.player], this.wall_floor);
+        
        
          
       

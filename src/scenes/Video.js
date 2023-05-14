@@ -53,8 +53,7 @@ class Video extends Phaser.Scene {
    });
       
 
-     
-  
+ 
      
       
      }
