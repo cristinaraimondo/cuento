@@ -34,15 +34,16 @@ class Firstscene extends Phaser.Scene{
         
         
         this.player = new Player(this, 100, 200, 'dude').setScale(0.8)
-        this.add.sprite(900, 300, 'ing', '1').setScale(0.2);
-        this.add.sprite(20, 305, 'ing', '2').setScale(0.2);
-        this.add.sprite(-350, 210, 'ing', '3').setScale(0.2);
-        this.add.sprite(-500, 400, 'ing', '4').setScale(0.2);
-        this.add.sprite(600, 250, 'ing', '5').setScale(0.2);
-        this.add.sprite(1700, 150, 'ing', '6').setScale(0.2);
-        this.add.sprite(1100, 250, 'ing', '7').setScale(0.2);
-        this.add.sprite(150,289, 'ing', '8').setScale(0.2);
-        this.add.sprite(3020, 390, 'ing', '9').setScale(0.2);
+        
+        this.cebolla=this.physics.add.sprite(900, 300, 'ing', '1').setScale(0.2)
+        this.ajo=this.physics.add.sprite(20, 305, 'ing', '2').setScale(0.2)
+      this.peperoni=this.physics.add.sprite(-350, 410, 'ing', '3').setScale(0.2)
+      this.masa=this.physics.add.sprite(-500, 400, 'ing', '4').setScale(0.2)
+      this.queso=this.physics.add.sprite(1700, 450, 'ing', '6').setScale(0.2)
+     this.oregano=this.physics.add.sprite(1100, 250, 'ing', '7').setScale(0.2)
+     this.campinone= this.physics.add.sprite(150,289, 'ing', '8').setScale(0.2)
+     this.tomatete=this.physics.add.sprite(3020, 390, 'ing', '9').setScale(0.2)
+    
        
         this.wall_floor = this.physics.add.staticGroup()
         this.wall_floor.create(0, 650, 'piso').setOrigin(0)
@@ -56,8 +57,18 @@ class Firstscene extends Phaser.Scene{
         //}
         this.physics.add.collider([this.player], this.wall_floor);
         
-       
-         
+        this.physics.add.overlap(this. cebolla, this.player, () => {
+           // this.registry.events.emit('update_points');
+            this.cebolla.destroy();
+             });
+             this.physics.add.overlap(this.ajo, this.player, () => {
+                // this.registry.events.emit('update_points');
+                 this.ajo.destroy();
+                  });
+                  this.physics.add.overlap(this.queso, this.player, () => {
+                    // this.registry.events.emit('update_points');
+                     this.queso.destroy();
+                      });
       
     }
     animacionesDeLaEscena() {
