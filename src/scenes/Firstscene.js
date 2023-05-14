@@ -30,17 +30,20 @@ class Firstscene extends Phaser.Scene{
             
     }
     create(){
+       this.itemsRecolectados = 0;
+     
+
        
         this.background = this.add.tileSprite(480, 320, 960, 640, 'background').setScrollFactor(0)
         this.tronco = this.physics.add.staticGroup();
         this.tronco.create(2880, 500, "tronco").setScale(0.5).setSize(120,120).setOffset(220, 60)
-        
+        this.textoItemsRecolectados = this.add.text(10, 10, 'Ingredientes de la pizza recolectados: 0', { font: '16px Arial', fill: '#ffffff' }).setScrollFactor(0);
         this.player = new Player(this, 100, 200, 'dude').setScale(0.8)
       // this.tronco= this.physics.add.sprite(2880,500,'tronco').setScale(0.5)
        // this.tronco.body.setSize(180, 210);
         //this.tronco.body.setOffset(200, 10);
         this.cebolla=this.physics.add.sprite(900, 300, 'ing', '1').setScale(0.2)
-        this.ajo=this.physics.add.sprite(20, 305, 'ing', '7').setScale(0.2)
+      this.ajo=this.physics.add.sprite(20, 305, 'ing', '7').setScale(0.2)
       this.peperoni=this.physics.add.sprite(-350, 410, 'ing', '8').setScale(0.2)
       this.masa=this.physics.add.sprite(-500, 400, 'ing', '5').setScale(0.2)
       this.queso=this.physics.add.sprite(1700, 450, 'ing', '4').setScale(0.2)
@@ -67,38 +70,47 @@ class Firstscene extends Phaser.Scene{
         this.physics.add.overlap(this. cebolla, this.player, () => {
            // this.registry.events.emit('update_points');
             this.cebolla.destroy();
+            this.itemsRecolectados++;
              });
              this.physics.add.overlap(this.ajo, this.player, () => {
                 // this.registry.events.emit('update_points');
                  this.ajo.destroy();
+                 this.itemsRecolectados++;
                   });
                   this.physics.add.overlap(this.queso, this.player, () => {
                     // this.registry.events.emit('update_points');
                      this.queso.destroy();
+                     this.itemsRecolectados++;
                       });
                       this.physics.add.overlap(this.aji, this.player, () => {
                         // this.registry.events.emit('update_points');
                          this.aji.destroy();
+                         this.itemsRecolectados++;
                           });
                           this.physics.add.overlap(this.peperoni, this.player, () => {
                             // this.registry.events.emit('update_points');
                              this.peperoni.destroy();
+                             this.itemsRecolectados++;
                               });
                               this.physics.add.overlap(this.masa, this.player, () => {
                                 // this.registry.events.emit('update_points');
                                  this.masa.destroy();
+                                 this.itemsRecolectados++;;
                                   });
                                   this.physics.add.overlap(this.oregano, this.player, () => {
                                     // this.registry.events.emit('update_points');
                                      this.oregano.destroy();
+                                     this.itemsRecolectados++;
                                       });
                                       this.physics.add.overlap(this.tomate, this.player, () => {
                                         // this.registry.events.emit('update_points');
                                          this.tomate.destroy();
+                                         this.itemsRecolectados++;
                                           });
                                           this.physics.add.overlap(this.campinone, this.player, () => {
                                             // this.registry.events.emit('update_points');
                                              this.campinone.destroy();
+                                             this.itemsRecolectados++;
                                               });
       
     }
@@ -117,6 +129,12 @@ class Firstscene extends Phaser.Scene{
 		});
 		this.anims.create({
 			key: 'reposo',
+			frames: this.anims.generateFrameNumbers('dude', {start: 4, end: 4}),
+			frameRate: 4,
+			repeat: -1,
+		});
+        this.anims.create({
+			key: 'estaSaltando',
 			frames: this.anims.generateFrameNumbers('dude', {start: 4, end: 4}),
 			frameRate: 4,
 			repeat: -1,
@@ -178,6 +196,11 @@ class Firstscene extends Phaser.Scene{
         this.cameras.main.scrollX = this.player.x - 400;
 		this.cameras.main.scrollY = 0;
         this.background.tilePositionX= this.player.x;
+        this.textoItemsRecolectados.setText('Ingredientes de la pizza recolectados: ' + this.itemsRecolectados);
+        if (this.itemsRecolectados === 9) {
+            // Cambiar de pantalla
+            this.scene.start('Presentacion');
+        }
       
 
     }
