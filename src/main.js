@@ -24,7 +24,7 @@ const config ={
             debug: true
         }
     },
-    scene:[ Firstscene,Presentación,Video, ],
+    scene:[ Presentación,Video,Firstscene ],
     video: {
         key: 'video',
         type: 'video',
