@@ -1,6 +1,7 @@
 import Firstscene from './scenes/Firstscene.js';
 import Video from './scenes/Video.js';
 import Presentación from './scenes/Presentación.js';
+import VersionCaperucita from './scenes/VersionCaperucita.js';
 const config ={
     title:'Capericita roja ',
   
@@ -24,7 +25,7 @@ const config ={
             debug: true
         }
     },
-    scene:[Firstscene, Presentación,Video ],
+    scene:[Presentación,Firstscene,Video, VersionCaperucita ],
     video: {
         key: 'video',
         type: 'video',

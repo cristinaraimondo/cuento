@@ -1,6 +1,7 @@
 import Player from "../clases/player.js";
 
 
+
 class Firstscene extends Phaser.Scene{
 
     constructor(){
@@ -25,30 +26,36 @@ class Firstscene extends Phaser.Scene{
             .image('flecha', 'sprites/flecha.png')
             .image('piso', 'piso.png' )
             .image('tronco','sprites/tronco.png')
+            .image('pizza','sprites/pizza.png')
             .atlas('ing', 'sprites/ingredi/ingredi.png', 'sprites/ingredi/ingredi_atlas.json');
+            this.load.audio('plop', '/sounds/plop1.MP3');
 
             
     }
     create(){
        this.itemsRecolectados = 0;
      
-
+       this.plop = this.sound.add('plop', {
+        loop: false,
+         volume: 0.8
+     });
+     this.plop.pause();
        
         this.background = this.add.tileSprite(480, 320, 960, 640, 'background').setScrollFactor(0)
         this.tronco = this.physics.add.staticGroup();
         this.tronco.create(2880, 500, "tronco").setScale(0.5).setSize(120,120).setOffset(220, 60)
         this.textoItemsRecolectados = this.add.text(10, 10, 'Ingredientes de la pizza recolectados: 0', { font: '16px Arial', fill: '#ffffff' }).setScrollFactor(0);
+        this.textoConsigna = this.add.text(10, 100, ['Caperucita va a llevarle a la abuelita, una pizza',' pero primero debe recoger todos los ingredientes para luego','hacer la pizza.','¿Le podés ayudar a juntarlos?'], { font: '16px Arial', fill: '#ffffff' }).setScrollFactor(0);
         this.player = new Player(this, 100, 200, 'dude').setScale(0.8)
-      // this.tronco= this.physics.add.sprite(2880,500,'tronco').setScale(0.5)
-       // this.tronco.body.setSize(180, 210);
-        //this.tronco.body.setOffset(200, 10);
+        this.pizza= this.add.image(0,0,'pizza').setOrigin(0,0).setScale(0.25).setScrollFactor(0)
+        this.pizza.setVisible(false)
         this.cebolla=this.physics.add.sprite(900, 300, 'ing', '1').setScale(0.2)
-      this.ajo=this.physics.add.sprite(20, 305, 'ing', '7').setScale(0.2)
+      this.ajo=this.physics.add.sprite(-200, 305, 'ing', '7').setScale(0.2)
       this.peperoni=this.physics.add.sprite(-350, 410, 'ing', '8').setScale(0.2)
       this.masa=this.physics.add.sprite(-500, 400, 'ing', '5').setScale(0.2)
       this.queso=this.physics.add.sprite(1700, 450, 'ing', '4').setScale(0.2)
      this.oregano=this.physics.add.sprite(1100, 280, 'ing', '6').setScale(0.2)
-     this.campinone= this.physics.add.sprite(150,289, 'ing', '2').setScale(0.2)
+     this.campinone= this.physics.add.sprite(250,289, 'ing', '2').setScale(0.2)
      this.tomate=this.physics.add.sprite(3020, 390, 'ing', '3').setScale(0.2)
      this.aji=this.physics.add.sprite(2880,170,'ing','9').setScale(0.2)
     
@@ -71,46 +78,55 @@ class Firstscene extends Phaser.Scene{
            // this.registry.events.emit('update_points');
             this.cebolla.destroy();
             this.itemsRecolectados++;
+            this.plop.play();
              });
              this.physics.add.overlap(this.ajo, this.player, () => {
                 // this.registry.events.emit('update_points');
                  this.ajo.destroy();
                  this.itemsRecolectados++;
+                 this.plop.play();
                   });
                   this.physics.add.overlap(this.queso, this.player, () => {
                     // this.registry.events.emit('update_points');
                      this.queso.destroy();
                      this.itemsRecolectados++;
+                     this.plop.play();
                       });
                       this.physics.add.overlap(this.aji, this.player, () => {
                         // this.registry.events.emit('update_points');
                          this.aji.destroy();
                          this.itemsRecolectados++;
+                         this.plop.play();
                           });
                           this.physics.add.overlap(this.peperoni, this.player, () => {
                             // this.registry.events.emit('update_points');
                              this.peperoni.destroy();
                              this.itemsRecolectados++;
+                             this.plop.play();
                               });
                               this.physics.add.overlap(this.masa, this.player, () => {
                                 // this.registry.events.emit('update_points');
                                  this.masa.destroy();
-                                 this.itemsRecolectados++;;
+                                 this.itemsRecolectados++;
+                                 this.plop.play();
                                   });
                                   this.physics.add.overlap(this.oregano, this.player, () => {
                                     // this.registry.events.emit('update_points');
                                      this.oregano.destroy();
                                      this.itemsRecolectados++;
+                                     this.plop.play();
                                       });
                                       this.physics.add.overlap(this.tomate, this.player, () => {
                                         // this.registry.events.emit('update_points');
                                          this.tomate.destroy();
                                          this.itemsRecolectados++;
+                                         this.plop.play();
                                           });
                                           this.physics.add.overlap(this.campinone, this.player, () => {
                                             // this.registry.events.emit('update_points');
                                              this.campinone.destroy();
                                              this.itemsRecolectados++;
+                                             this.plop.play();
                                               });
       
     }
@@ -199,8 +215,16 @@ class Firstscene extends Phaser.Scene{
         this.textoItemsRecolectados.setText('Ingredientes de la pizza recolectados: ' + this.itemsRecolectados);
         if (this.itemsRecolectados === 9) {
             // Cambiar de pantalla
-            this.scene.start('Presentacion');
+            this.pizza.setVisible(true)
+            this.player.setVisible(false)
+            
+            this.time.delayedCall(2000, () => {
+            
+                this.scene.start('Cape' );
+           });
+           
         }
+        
       
 
     }
