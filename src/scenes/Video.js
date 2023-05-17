@@ -43,12 +43,13 @@ class Video extends Phaser.Scene {
        this.scene.start('Firstscene');
        this.sound.pauseAll();
       });
-      var botonCap=this.add.image(800, 200,'btnLobo').setScale(0.2)
-      botonCap.setInteractive()
-      botonCap.on('pointerdown', function() {
-        // Hace el botón invisible
-        boton.setVisible(false);
-      });
+      var botonLobo=this.add.image(800, 200,'btnLobo').setScale(0.2)
+      botonLobo.setInteractive()
+      botonLobo.on('pointerdown', () => {
+        this.sound.pauseAll();
+        this.scene.start('VersionLobo' );
+       
+       });
         
    });
       
