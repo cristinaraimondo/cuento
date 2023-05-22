@@ -1,12 +1,12 @@
-class Video extends Phaser.Scene {
+import { BotonReproducir } from "../clases/boton_reprocucir.js";
+
+class InicioCuento extends Phaser.Scene {
   constructor() {
-    super({ key: "Video" });
+    super({ key: "InicioCuento" });
   }
   preload() {
-    this.load.image("rep", "assets/audio.png");
     this.load.image("btnCap", "assets/sprites/botonCap.png");
     this.load.image("btnLobo", "assets/sprites/btnlobo.png");
-    this.load.image("pausa", "assets/pausar.png");
     this.load.video(
       "video",
       "assets/videos/cepe1.mp4",
@@ -21,6 +21,7 @@ class Video extends Phaser.Scene {
     this.crearIntro();
     this.crearBotones();
     this.crearListeners();
+    this.botonRepr.reproducir();
   }
 
   crearIntro() {
@@ -29,23 +30,23 @@ class Video extends Phaser.Scene {
       loop: false,
       volume: 0.8,
     });
-    this.miSonido.play();
-    this.miSonido.pause();
     // Añade el video a la escena
     this.video = this.add.video(450, 300, "video").setScale(0.48);
-    this.video.pause();
+
+    this.videos = [this.video];
+    this.audios = [this.miSonido];
   }
 
   crearBotones() {
     // Boton para reproducir y pausar el video
-    this.botonRepr = this.add
-      .image(
-        this.sys.game.canvas.width - 10,
-        this.sys.game.canvas.height - 10,
-        "rep"
-      )
-      .setScale(0.2)
-      .setOrigin(1, 1);
+    this.botonRepr = new BotonReproducir(
+      this,
+      this.sys.game.canvas.width - 10,
+      this.sys.game.canvas.height - 10,
+      this.videos,
+      this.audios
+    );
+    this.botonRepr.setScale(0.2).setOrigin(1, 1);
     this.botonRepr.setInteractive();
     // Botones para alternar la historia
     this.botonCaperucita = this.add.image(800, 400, "btnCap").setScale(0.2);
@@ -59,16 +60,15 @@ class Video extends Phaser.Scene {
     this.botonRepr.on(
       "pointerdown",
       function () {
-        console.log(this.video.isPlaying());
-        console.log(this.miSonido.isPlaying);
-        if (this.video.isPlaying() || this.miSonido.isPlaying) {
-          console.log("pausa");
-          this.botonRepr.setTexture("rep");
-          this.pausarIntro();
+        if (
+          !this.botonRepr.estaReproduciendo() &&
+          !this.botonRepr.estaPausado()
+        ) {
+          this.botonRepr.reproducir();
+        } else if (this.botonRepr.estaReproduciendo()) {
+          this.botonRepr.pausar();
         } else {
-          console.log("reanudar");
-          this.botonRepr.setTexture("pausa");
-          this.reanudarIntro();
+          this.botonRepr.reanudar();
         }
       },
       this
@@ -77,7 +77,7 @@ class Video extends Phaser.Scene {
     this.botonCaperucita.once(
       "pointerdown",
       () => {
-        this.scene.start("Firstscene");
+        this.scene.start("CaperucitaBuscaIngredientes");
         this.sound.stopAll();
       },
       this
@@ -100,23 +100,19 @@ class Video extends Phaser.Scene {
         this.botonLobo.setVisible(true);
         this.botonCaperucita.setInteractive();
         this.botonLobo.setInteractive();
+        this.botonRepr.setIconoReproducir();
+      },
+      this
+    );
+    this.game.events.on(
+      Phaser.Core.Events.BLUR,
+      () => {
+        if (this.botonRepr.estaReproduciendo()) {
+          this.botonRepr.pausar();
+        }
       },
       this
     );
   }
-
-  pausarIntro() {
-    console.log("pausarIntro");
-    this.miSonido.pause();
-    this.video.pause();
-  }
-
-  reanudarIntro() {
-    console.log("reanudarIntro");
-    this.miSonido.resume();
-    this.video.resume();
-  }
-
-  update() {}
 }
-export default Video;
+export default InicioCuento;
