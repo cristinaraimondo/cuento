@@ -32,7 +32,6 @@ class InicioCuento extends Phaser.Scene {
     });
     // Añade el video a la escena
     this.video = this.add.video(450, 300, "video").setScale(0.48);
-
     this.videos = [this.video];
     this.audios = [this.miSonido];
   }

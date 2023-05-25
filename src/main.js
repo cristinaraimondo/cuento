@@ -1,4 +1,5 @@
 import CaperucitaBuscaIngredientes from "./scenes/caperucita_busca_ingredientes.js";
+import CaperucitaJuntaResiduos from "./scenes/Caperucita_junta_residuos.js"
 import InicioCuento from "./scenes/inicio_cuento.js";
 import Presentacion from "./scenes/presentacion.js";
 import VersionCaperucita from "./scenes/VersionCaperucita.js";
@@ -26,11 +27,14 @@ const config = {
     },
   },
   scene: [
+    VersionLobo,
+    CaperucitaJuntaResiduos,
+    
     Presentacion,
     InicioCuento,
     CaperucitaBuscaIngredientes,
     VersionCaperucita,
-    VersionLobo,
+    
   ],
   video: {
     key: "video",

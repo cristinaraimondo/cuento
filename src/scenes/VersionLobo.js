@@ -8,7 +8,17 @@ class VersionLobo extends Phaser.Scene {
   preload() {
     this.load.path = "./assets/";
 
-    this.load.audio("lobo", "sounds/vozLobo.MP3");
+    this.load.audio("lobo", "sounds/versionLobo1.MP3");
+    this.load.image("iconoReproducir", "audio.png");
+    this.load.image("iconoPausa", "pausar.png");
+    this.load.image("mano", "sprites/mano.png")
+    this.load.video(
+      "videoLobo",
+      "videos/versionLobo1.mp4",
+      "loadeddata",
+      false,
+      true
+    );
   }
 
   create() {
@@ -16,6 +26,7 @@ class VersionLobo extends Phaser.Scene {
     this.crearBotones();
     this.crearListeners();
     this.botonRepr.reproducir();
+    
   }
 
   crearVersionLobo() {
@@ -23,9 +34,12 @@ class VersionLobo extends Phaser.Scene {
       loop: false,
       volume: 0.8,
     });
-
+// Añade el video a la escena
+    this.video = this.add.video(450, 300, "videoLobo").setScale(0.48);
     this.audios = [this.versionLobo];
-    this.videos = [];
+    this.videos = [this.video];
+    this.btnMmano= this.add.image(830,300, "mano")
+    
   }
 
   crearBotones() {
@@ -38,6 +52,8 @@ class VersionLobo extends Phaser.Scene {
     );
     this.botonRepr.setScale(0.2).setOrigin(1, 1);
     this.botonRepr.setInteractive();
+    this.btnMmano.setInteractive()
+    this.btnMmano.setVisible(false).setScale(0.5)
   }
 
   crearListeners() {
@@ -57,10 +73,19 @@ class VersionLobo extends Phaser.Scene {
       },
       this
     );
+    this.btnMmano.once(
+      "pointerdown",
+      () => {
+        this.scene.start('recolecta');
+      },
+      this
+    );
     this.versionLobo.on(
       "complete",
       () => {
         this.botonRepr.setIconoReproducir();
+        this.botonRepr.setVisible(false)
+        this.btnMmano.setVisible(true)
       },
       this
     );
