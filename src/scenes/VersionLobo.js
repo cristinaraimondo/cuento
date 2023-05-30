@@ -35,7 +35,7 @@ class VersionLobo extends Phaser.Scene {
       volume: 0.8,
     });
 // Añade el video a la escena
-    this.video = this.add.video(450, 300, "videoLobo").setScale(0.48);
+    this.video = this.add.video(450, 300, "videoLobo").setScale(0.70);
     this.audios = [this.versionLobo];
     this.videos = [this.video];
     this.btnMmano= this.add.image(830,300, "mano")

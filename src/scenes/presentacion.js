@@ -27,7 +27,7 @@ class Presentacion extends Phaser.Scene {
     this.botonRepr = new BotonReproducir(
       this,
       this.sys.game.canvas.width - 10,
-      this.sys.game.canvas.height - 10
+      this.sys.game.canvas.height - 150
     )
       .setScale(0.2)
       .setOrigin(1, 1);

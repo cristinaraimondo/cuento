@@ -171,17 +171,11 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
       repeat: -1,
     });
     this.anims.create({
-      key: "reposo",
-      frames: this.anims.generateFrameNumbers("dude", { start: 4, end: 4 }),
-      frameRate: 4,
-      repeat: -1,
-    });
-    this.anims.create({
-      key: "estaSaltando",
-      frames: this.anims.generateFrameNumbers("dude", { start: 4, end: 4 }),
-      frameRate: 4,
-      repeat: -1,
-    });
+      key: 'reposo',
+      frames: [ { key: 'dude', frame: 4 } ],
+      frameRate: 20
+  });
+    
   }
 
   controlesVisuales() {
@@ -233,7 +227,7 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
       this.player.getData("direccionHorizontal") === Phaser.LEFT
     ) {
       this.player.caminarALaIzquierda();
-      this.player.setVelocityX(-200);
+      this.player.setVelocityX(-250);
     } else if (
       this.cursors.right.isDown ||
       this.player.getData("direccionHorizontal") === Phaser.RIGHT

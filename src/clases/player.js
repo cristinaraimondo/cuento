@@ -15,11 +15,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.reposo();
   }
 
-  // preUpdate (time, delta)
-  // {
-  //     super.preUpdate(time, delta);
-
-  // }
 
   init() {
     this.setBounce(0.2)
@@ -33,15 +28,19 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   saltar() {
     if (this.enElSuelo) {
       this.body.setVelocityY(-250);
+     
       this.play("estaSaltando", true);
     }
   }
 
   caminarALaIzquierda() {
+   
     if (this.enElSuelo) this.play("walk2", true);
+  
   }
 
   caminarALaDerecha() {
+    
     if (this.enElSuelo) this.play("walk", true);
   }
 

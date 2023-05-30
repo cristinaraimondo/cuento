@@ -41,8 +41,8 @@ class CaperucitaJuntaResiduos extends Phaser.Scene  {
     create() {
       
       this.background = this.add.tileSprite(480, 320, 960, 640, 'background').setScrollFactor(0)
-        this.tronco = this.physics.add.staticGroup();
-        this.tronco.create(2880, 500, "tronco").setScale(0.5).setSize(120,120).setOffset(220, 60)
+      this.tronco = this.physics.add.staticGroup();
+      this.tronco.create(2880, 500, "tronco").setScale(0.5).setSize(120,120).setOffset(220, 60)
       this.player = new Player(this, 100, 100);
       this.pasosSound = this.sound.add('pasos');
       this.pasosSound.volume = 0.5; 
@@ -144,11 +144,11 @@ for (var i = 0; i < totalAlimentos; i++) {
        
         this.alimentosDepositados += 1; // Incrementa el contador de alimentos depositados
 
-        if (this.alimentosDepositados === this.totalAlimentos) {
+       /* if (this.alimentosDepositados === this.totalAlimentos) {
           // Si se han depositado todos los alimentos, cambia a la siguiente escena
           this.sound.stopAll();
-          this.scene.start('Presentacion' );
-        }
+          this.scene.start("VersionLoboFinal" );
+        }*/
       }
     });
   }
@@ -178,11 +178,11 @@ depositarAlimentosNoOrganicos(player, bote) {
         alimentoDepositado2.destroy() // Elimina el sprite del alimento depositado
         this.alimentosDepositados += 1; 
 
-        if (this.alimentosDepositados === this.totalAlimentos) {
+       /* if (this.alimentosDepositados === this.totalAlimentos) {
          
           this.sound.stopAll();
-          this.scene.start('Presentacion' );
-        }
+          this.scene.start("VersionLoboFinal");
+        }*/
        
       }
     });
@@ -190,29 +190,29 @@ depositarAlimentosNoOrganicos(player, bote) {
 }
   
     update() {
-        if (
-            this.cursors.left.isDown ||
-            this.player.getData("direccionHorizontal") === Phaser.LEFT
-          ) {
-            this.player.caminarALaIzquierda();
-            this.player.setVelocityX(-200);
-          } else if (
-            this.cursors.right.isDown ||
-            this.player.getData("direccionHorizontal") === Phaser.RIGHT
-          ) {
-            this.player.setVelocityX(250);
-            this.player.caminarALaDerecha();
-          } else {
-            this.player.setVelocityX(0);
-            this.player.reposo();
-          }
-          if (
-            this.cursors.up.isDown ||
-            this.player.getData("estaSaltando") === Phaser.UP
-          ) {
-            this.player.saltar();
-          }
-          this.player.update();
+      if (
+        this.cursors.left.isDown ||
+        this.player.getData("direccionHorizontal") === Phaser.LEFT
+      ) {
+        this.player.caminarALaIzquierda();
+        this.player.setVelocityX(-250);
+      } else if (
+        this.cursors.right.isDown ||
+        this.player.getData("direccionHorizontal") === Phaser.RIGHT
+      ) {
+        this.player.setVelocityX(250);
+        this.player.caminarALaDerecha();
+      } else {
+        this.player.setVelocityX(0);
+        this.player.reposo();
+      }
+      if (
+        this.cursors.up.isDown ||
+        this.player.getData("estaSaltando") === Phaser.UP
+      ) {
+        this.player.saltar();
+      }
+      this.player.update();
           this.cameras.main.scrollX = this.player.x - 400;
           this.cameras.main.scrollY = 0;
           this.background.tilePositionX = this.player.x;
@@ -221,7 +221,9 @@ depositarAlimentosNoOrganicos(player, bote) {
        // Actualización del jugador
        
      
-      if (this.cursors.left.isDown || this.cursors.right.isDown) {
+      if (this.cursors.left.isDown || this.cursors.right.isDown || 
+        this.player.getData("direccionHorizontal") === Phaser.LEFT ||  
+        this.player.getData("direccionHorizontal") === Phaser.RIGHT ){
         
         if (!this.pasosSound.isPlaying) {
           this.pasosSound.play();
@@ -235,36 +237,29 @@ depositarAlimentosNoOrganicos(player, bote) {
         this.sound.stopAll();
         
       
-        this.scene.start('SiguienteEscena');
+        this.scene.start("VersionLoboFinal" );
       }
     }
     animacionesDeLaEscena() {
       this.anims.create({
-        key: 'walk',
-        frames: this.anims.generateFrameNumbers('dude', {start: 5, end: 8}),
+        key: "walk",
+        frames: this.anims.generateFrameNumbers("dude", { start: 5, end: 8 }),
         frameRate: 10,
         repeat: -1,
       });
-          this.anims.create({
-        key: 'walk2',
-        frames: this.anims.generateFrameNumbers('dude', {start: 0, end: 3}),
+      this.anims.create({
+        key: "walk2",
+        frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }),
         frameRate: 10,
         repeat: -1,
       });
       this.anims.create({
         key: 'reposo',
-        frames: this.anims.generateFrameNumbers('dude', {start: 4, end: 4}),
-        frameRate: 4,
-        repeat: -1,
-      });
-          this.anims.create({
-        key: 'estaSaltando',
-        frames: this.anims.generateFrameNumbers('dude', {start: 4, end: 4}),
-        frameRate: 4,
-        repeat: -1,
-      });
-    }
+        frames: [ { key: 'dude', frame: 4 } ],
+        frameRate: 20
+    });
       
+    }
       controlesVisuales() {
           this.player.setData('direccionHorizontal', 0);
           this.player.setData('estaSaltando', false);
