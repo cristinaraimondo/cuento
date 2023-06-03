@@ -52,7 +52,7 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
     this.textoItemsRecolectados = this.add
       .text(10, 10, "Ingredientes de la pizza recolectados: 0", {
         font: "16px Arial",
-        fill: "#ffffff",
+        fill: "#000000",
       })
       .setScrollFactor(0);
     this.textoConsigna = this.add
@@ -61,11 +61,11 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
         100,
         [
           "Caperucita va a llevarle a la abuelita, una pizza",
-          " pero primero debe recoger todos los ingredientes para luego",
-          "hacer la pizza.",
+          " pero primero debe recoger todos los ingredientes",
+          "para luego hacer la pizza.",
           "¿Le podés ayudar a juntarlos?",
         ],
-        { font: "16px Arial", fill: "#ffffff" }
+        { font: "16px Arial", fill: "#000000" }
       )
       .setScrollFactor(0);
     this.player = new Player(this, 100, 200, "dude").setScale(0.8);
@@ -257,7 +257,7 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
       this.player.setVisible(false);
 
       this.time.delayedCall(2000, () => {
-        this.scene.start("Cape");
+        this.scene.start("CaperucitaVuela");
       });
     }
   }

@@ -4,7 +4,7 @@ class CaperucitaJuntaResiduos extends Phaser.Scene  {
     constructor(){
         super('recolecta');
         this.totalAlimentos = 20; //  total de alimentos a recolectar
-    this.alimentosDepositados = 0; // Contador de alimentos depositados
+        this.alimentosDepositados = 0; // Contador de alimentos depositados
     }
   
   

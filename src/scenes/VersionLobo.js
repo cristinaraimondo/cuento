@@ -14,7 +14,7 @@ class VersionLobo extends Phaser.Scene {
     this.load.image("mano", "sprites/mano.png")
     this.load.video(
       "videoLobo",
-      "videos/versionLobo1.mp4",
+      "videos/versionLobo.mp4",
       "loadeddata",
       false,
       true

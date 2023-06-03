@@ -7,6 +7,7 @@ class InicioCuento extends Phaser.Scene {
   preload() {
     this.load.image("btnCap", "assets/sprites/botonCap.png");
     this.load.image("btnLobo", "assets/sprites/btnlobo.png");
+    
     this.load.video(
       "video",
       "assets/videos/cepe1.mp4",

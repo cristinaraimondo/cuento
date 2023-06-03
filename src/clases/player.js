@@ -40,6 +40,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   caminarALaDerecha() {
+  
     
     if (this.enElSuelo) this.play("walk", true);
   }

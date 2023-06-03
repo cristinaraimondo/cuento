@@ -1,5 +1,6 @@
 import CaperucitaBuscaIngredientes from "./scenes/caperucita_busca_ingredientes.js";
 import CaperucitaJuntaResiduos from "./scenes/caperucita_junta_residuos.js";
+import CaperucitaVuelaACasaAbuelita from "./scenes/caperucita_vuela_A_casa_abuelita.js";
 import InicioCuento from "./scenes/inicio_cuento.js";
 import Presentacion from "./scenes/presentacion.js";
 import VersionCaperucita from "./scenes/VersionCaperucita.js";
@@ -28,16 +29,19 @@ const config = {
     },
   },
   scene: [
-    Presentacion,
-    VersionLobo,
-    CaperucitaJuntaResiduos,
-   
+    CaperucitaVuelaACasaAbuelita,
+    
+
   
-   
-    VersionLoboFinal,
+    Presentacion,
     InicioCuento,
     CaperucitaBuscaIngredientes,
-    VersionCaperucita,
+   
+    
+    VersionLobo,
+    CaperucitaJuntaResiduos,
+    VersionLoboFinal,
+   VersionCaperucita,
     
   ],
   video: {
