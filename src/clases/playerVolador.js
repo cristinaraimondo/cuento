@@ -16,7 +16,7 @@ export default class PlayerVolador extends Phaser.Physics.Arcade.Sprite {
       this.volarALaDerecha();
       this.reposar();
       this.vidas=3;
-      this.setSize(50,50)
+      this.setSize(70,70)
      
       
     }

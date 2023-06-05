@@ -11,6 +11,7 @@ class VersionLoboFinal extends Phaser.Scene {
     this.load.audio("lobo1", "sounds/versionLoboFinal.MP3");
     this.load.image("iconoReproducir", "audio.png");
     this.load.image("iconoPausa", "pausar.png");
+    this.load.image("btnCap", "sprites/botonCap.png");
     
     this.load.video(
       "videoLobo1",
@@ -52,6 +53,9 @@ class VersionLoboFinal extends Phaser.Scene {
     );
     this.botonRepr.setScale(0.2).setOrigin(1, 1);
     this.botonRepr.setInteractive();
+    this.botonCaperucita = this.add.image(800, 400, "btnCap").setScale(0.2);
+    this.botonCaperucita.setVisible(false);
+    
     
 
   }
@@ -73,12 +77,24 @@ class VersionLoboFinal extends Phaser.Scene {
       },
       this
     );
+    // Al hacer click en el boton de caperucita se sigue su historia
+    this.botonCaperucita.once(
+      "pointerdown",
+      () => {
+        this.scene.start("InicioCuento" );
+        this.sound.stopAll();
+      },
+      this
+    );
     
-    this.versionLobo.on(
+    this.video.on(
       "complete",
       () => {
         this.botonRepr.setIconoReproducir();
         this.botonRepr.setVisible(false)
+        this.botonCaperucita.setInteractive();
+        this.botonCaperucita.setVisible(true);
+        
         
       },
       this

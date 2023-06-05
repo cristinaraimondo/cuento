@@ -1,9 +1,11 @@
 import CaperucitaBuscaIngredientes from "./scenes/caperucita_busca_ingredientes.js";
+import CaperucitaCruzaBosque from "./scenes/caperucita_cruza_elBosque.js";
 import CaperucitaJuntaResiduos from "./scenes/caperucita_junta_residuos.js";
 import CaperucitaVuelaACasaAbuelita from "./scenes/caperucita_vuela_A_casa_abuelita.js";
 import InicioCuento from "./scenes/inicio_cuento.js";
 import Presentacion from "./scenes/presentacion.js";
 import VersionCaperucita from "./scenes/VersionCaperucita.js";
+import VersionCaperucitaFinal from "./scenes/versionCaperucitaFinal.js";
 import VersionLobo from "./scenes/VersionLobo.js";
 import VersionLoboFinal from "./scenes/versionLoboFinal.js";
 const config = {
@@ -25,23 +27,21 @@ const config = {
     default: "arcade",
     arcade: {
       // gravity: { y: 300 },
-      debug: true,
+      debug: false,
     },
   },
   scene: [
-    CaperucitaVuelaACasaAbuelita,
-    
-
-  
     Presentacion,
-    InicioCuento,
+    CaperucitaVuelaACasaAbuelita,
     CaperucitaBuscaIngredientes,
-   
-    
-    VersionLobo,
-    CaperucitaJuntaResiduos,
     VersionLoboFinal,
-   VersionCaperucita,
+    VersionLobo,
+    VersionCaperucitaFinal,
+    CaperucitaCruzaBosque,
+    InicioCuento,
+    CaperucitaJuntaResiduos,
+    VersionCaperucita,
+   
     
   ],
   video: {

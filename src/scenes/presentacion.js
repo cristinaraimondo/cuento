@@ -11,7 +11,8 @@ class Presentacion extends Phaser.Scene {
     // LOAD IMAGES AND SPRITES
     this.load.image("iconoReproducir", "audio.png");
     this.load.image("iconoPausa", "pausar.png");
-    this.load.image("intro", "fondos/tapa6.png");
+    this.load.image("intro", "fondos/tapa.png");
+    this.load.image("creditos", "creditos.png");
   }
   create() {
     this.crearFondo();
@@ -21,6 +22,8 @@ class Presentacion extends Phaser.Scene {
 
   crearFondo() {
     this.tapa = this.add.image(450, 300, "intro");
+    this.creditos= this.add.image(450, 300, "creditos")
+    this.creditos.setVisible(false)
   }
 
   crearBotones() {
@@ -35,6 +38,9 @@ class Presentacion extends Phaser.Scene {
   }
 
   crearListeners() {
+    this.time.delayedCall(2000, () => {
+      this.creditos.setVisible(true)
+    });
     this.botonRepr.once(
       "pointerdown",
       () => {
@@ -42,6 +48,7 @@ class Presentacion extends Phaser.Scene {
       },
       this
     );
+    
   }
 }
 export default Presentacion;

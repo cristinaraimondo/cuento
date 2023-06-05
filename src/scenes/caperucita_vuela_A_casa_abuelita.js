@@ -108,7 +108,7 @@ class CaperucitaVuelaACasaAbuelita extends Phaser.Scene {
   colisionaJugadorCasa(jugador, casa) {
     this.llegoACasa = true;
     if (this.itemsRecolectados === this.totalItems && this.llegoACasa) {
-      this.scene.start("VersionLobo" ); // Cambia a la nueva escena cuando se hayan recogido todos los items y el jugador haya llegado a su casa
+      this.scene.start("VersionCapeFinal"); // Cambia a la nueva escena cuando se hayan recogido todos los items y el jugador haya llegado a su casa
     }
   }
   colisionaJugadorItem(jugador, item) {
@@ -119,9 +119,7 @@ class CaperucitaVuelaACasaAbuelita extends Phaser.Scene {
    
     // Aquí puedes agregar lógica adicional relacionada con la colisión con el item
   
-    if (this.itemsRecolectados === this.totalItems && this.llegoACasa) {
-      this.scene.start("VersionLobo" ); // Cambia a la nueva escena cuando se hayan recogido todos los items y el jugador haya llegado a su casa
-    }
+   
   }}
   colisionJugadorItem(jugador, item) {
     if (this.vidas < this.vidasMaximas) {
@@ -281,7 +279,7 @@ class CaperucitaVuelaACasaAbuelita extends Phaser.Scene {
       this.scene.restart(); // Reiniciar la escena actual
     }
     if (this.player.getData('items') === 4 &&this.llegoACasa===true) {
-      this.scene.start("VersionLoboFinal" ); // Reiniciar la escena actual
+      this.scene.start("VersionCapeFinal"); // Reiniciar la escena actual
     }
     // Verificar si el jugador ha llegado a su casa
   if (this.player.x > 4000 && this.player.y < 200) {

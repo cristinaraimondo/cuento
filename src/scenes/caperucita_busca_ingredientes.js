@@ -30,6 +30,8 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
         "sprites/ingredi/ingredi_atlas.json"
       );
     this.load.audio("plop", "/sounds/plop1.MP3");
+    this.load.audio('pasos', 'sounds/misc141.mp3');
+    this.load.audio('bosque', 'sounds/bosque.mp3');
   }
   create() {
     this.itemsRecolectados = 0;
@@ -88,6 +90,11 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
       .setScale(0.2);
     this.tomate = this.physics.add.sprite(3020, 390, "ing", "3").setScale(0.2);
     this.aji = this.physics.add.sprite(2880, 170, "ing", "9").setScale(0.2);
+    this.pasosSound = this.sound.add('pasos');
+      this.pasosSound.volume = 0.5; 
+      this.sonidoBosque=this.sound.add('bosque')
+      this.sonidoBosque.volume = 0.9; 
+      this.sonidoBosque.play()
 
     this.wall_floor = this.physics.add.staticGroup();
     this.wall_floor.create(0, 650, "piso").setOrigin(0);
@@ -228,6 +235,7 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
     ) {
       this.player.caminarALaIzquierda();
       this.player.setVelocityX(-250);
+      
     } else if (
       this.cursors.right.isDown ||
       this.player.getData("direccionHorizontal") === Phaser.RIGHT
@@ -257,9 +265,24 @@ class CaperucitaBuscaIngredientes extends Phaser.Scene {
       this.player.setVisible(false);
 
       this.time.delayedCall(2000, () => {
-        this.scene.start("CaperucitaVuela");
+        this.sound.stopAll();
+        this.scene.start("cruzaBosque");
+        
       });
     }
+    if (this.cursors.left.isDown || this.cursors.right.isDown || 
+      this.player.getData("direccionHorizontal") === Phaser.LEFT ||  
+      this.player.getData("direccionHorizontal") === Phaser.RIGHT ){
+      
+      if (!this.pasosSound.isPlaying) {
+        this.pasosSound.play();
+      }
+    } else {
+      
+      this.pasosSound.stop();
+    }
+   
+  
   }
 }
 export default CaperucitaBuscaIngredientes;
